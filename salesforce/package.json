@@ -1,0 +1,30 @@
+{
+  "name": "salesforce",
+  "version": "1.0.0",
+  "description": "A function invoked by an Amazon Pinpoint Campaign or Journey that will insert a record into Salesforce",
+  "main": "app.js",
+  "repository": "https://github.com/angrycider/amazon-pinpoint-custom-channels/tree/master/salesforce",
+  "author": "angrycider",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jsforce": "^1.9.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.25.3"
+  },
+  "scripts": {
+    "test": "mocha tests/unit/"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.32.0",
+    "@typescript-eslint/parser": "^2.32.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.0.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^6.1.4"
+  }
+}

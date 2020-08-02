@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Amazon Pinpoint Salesforce Channel.  This application will insert records into Salesforce.  Written in Node.
+
+Parameters:
+  SFCONSUMERKEY:
+    Type: String
+    Description: Salesforce Consumer Key
+  SFPRIVATEKEY:
+    Type: String
+    Description: The private Key linked to the public SSL cert without the header and footer
+  SFAPIUSERNAME:
+    Type: String
+    Description: The api user used by aws to connect to sfdc
+  SFLOGINURL:
+    Type: String
+    Description: The oauth login url
+  SFOBJECTTYPE:
+    Type: String
+    Description: The type of record to insert Lead, Contact, or CustomObject__c for a custom object that has been added to the account
+  UPDATEATTRIBUTE:
+    Type: String
+    Description: (Optional) If specified will perform an Upsert using the value in the specified attribute.  For example if the Endpoint has an attribute of `SFDC_Lead_ID` then the function will use the value of of that attribute to Update the object.  If the value is missing or blank then the function will insert a new record
+
+Resources:
+  SalesforceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: salesforce/
+      Handler: app.handler
+      Runtime: nodejs12.x
+      Timeout: 60
+      Policies:
+        - Statement:
+          - Sid: PinpointPutEvents
+            Effect: Allow
+            Action: mobiletargeting:PutEvents
+            Resource: !Sub arn:${AWS::Partition}:mobiletargeting:${AWS::Region}:${AWS::AccountId}:*
+      Environment:
+        Variables:
+          SFCONSUMERKEY: !Ref SFCONSUMERKEY
+          SFPRIVATEKEY: !Ref SFPRIVATEKEY
+          SFAPIUSERNAME: !Ref SFAPIUSERNAME
+          SFLOGINURL: !Ref SFLOGINURL
+          SFOBJECTTYPE: !Ref SFOBJECTTYPE
+          UPDATEATTRIBUTE: !Ref UPDATEATTRIBUTE
+  
+  PinpointInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref SalesforceFunction
+      Principal: !Sub pinpoint.${AWS::Region}.amazonaws.com
+      SourceArn: !Sub arn:${AWS::Partition}:mobiletargeting:${AWS::Region}:${AWS::AccountId}:apps/*
+
+Outputs:
+  SalesforceFunction:
+    Description: "A function invoked by an Amazon Pinpoint Campaign or Journey that will insert a record into Salesforce"
+    Value: !GetAtt SalesforceFunction.Arn
