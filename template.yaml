@@ -22,6 +22,19 @@ Parameters:
     Type: String
     Description: (Optional) If specified will perform an Upsert using the value in the specified attribute.  For example if the Endpoint has an attribute of `SFDC_Lead_ID` then the function will use the value of of that attribute to Update the object.  If the value is missing or blank then the function will insert a new record
 
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: amazon-pinpoint-salesforce-channel
+    Description: Amazon Pinpoint Salesforce Channel.  This application will insert records from Pinpoint into Salesforce.
+    Author: Amazon Pinpoint
+    SpdxLicenseId: MIT-0
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels: ['amazon-pinpoint', 'pinpoint', 'custom-channel', 'salesforce', 'nodejs']
+    HomePageUrl: https://aws.amazon.com/pinpoint
+    SemanticVersion: 1.0.0
+    SourceCodeUrl: https://github.com/aws-samples/amazon-pinpoint-salesforce-channel
+
 Resources:
   SalesforceFunction:
     Type: AWS::Serverless::Function
