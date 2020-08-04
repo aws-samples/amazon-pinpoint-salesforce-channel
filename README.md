@@ -8,10 +8,10 @@ The purpose of this application is to be used in integration with Amazon Pinpoin
 This solution will use the [OAuth 2.0 JWT Bearer Flow for Server-to-Server Integration](https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm&type=5) 
 
 - You will need a Salesforce account.  A free [Developer Account](https://developer.salesforce.com) works great with this example.
-- See [Salesforce Connected App Setup Guide](sfdc_connected_app_setup.md) for more details.
+- See [Salesforce Connected App Setup Guide](https://github.com/aws-samples/amazon-pinpoint-salesforce-channel/blob/master/sfdc_connected_app_setup.md) for more details.
 
 ## Input Parameters
-- **SFCONSUMERKEY** - The Connected App Consumer Key found [here]()
+- **SFCONSUMERKEY** - The Connected App Consumer Key found [here](https://github.com/aws-samples/amazon-pinpoint-salesforce-channel/blob/master/sfdc_connected_app_setup.md)
 - **SFPRIVATEKEY** - The private Key linked to the public SSL cert without the header and footer (key.pem from the command above)
 - **SFAPIUSERNAME** - The api user used by aws to connect to sfdc
 - **SFLOGINURL** - The oauth login url...typically: https://login.salesforce.com or https://test.salesforce.com for sandbox.
